@@ -9,7 +9,7 @@ using ProjetoEventos.API.Data;
 
 namespace ProjetoEventos.API
 {
-    public class Startup
+	public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -25,6 +25,7 @@ namespace ProjetoEventos.API
 				context => context.UseSqlite(Configuration.GetConnectionString("Default"))					
 			);
 			services.AddControllers();
+			services.AddCors();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjetoEventos.API", Version = "v1" });
@@ -47,6 +48,10 @@ namespace ProjetoEventos.API
 
 			app.UseAuthorization();
 
+			app.UseCors(x => x.AllowAnyHeader()
+								.AllowAnyMethod()
+								.AllowAnyOrigin());
+			
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
