@@ -488,3 +488,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+#Data Base files
+*.db
+*.db-shm
+*.db-wal
